@@ -1,0 +1,24 @@
+[project]
+name = "api"
+version = "0.0.1"
+description = "Example of AWS SAM + Litestar + PDM integration"
+authors = [
+    {name = "gusalecar", email = "gc.git@outlook.com"},
+]
+dependencies = [
+    "mangum>=0.17.0",
+    "litestar>=2.0.0a4",
+]
+requires-python = "~=3.10.0"
+license = {text = "MIT"}
+
+[tool.pdm]
+[tool.pdm.dev-dependencies]
+dev = [
+    "uvicorn>=0.21.1",
+]
+
+[tool.pdm.scripts]
+post_lock = "pdm export --prod --without-hashes -o dependencies/requirements.txt"
+post_install = "pdm export --prod --without-hashes -o dependencies/requirements.txt"
+dev = "uvicorn src.app:app --reload"
